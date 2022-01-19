@@ -30,3 +30,32 @@ checkGameEnd(newBoard, Turn)
 game(Board, Turn)
 
 */
+ 1 2 3 4 5 
+A
+B
+C
+D
+
+
+/*
+adjacentUp(Board, X, Y, Adj):-
+    Y < 0,
+    !,
+    matrix(Board, )
+
+adjacentDown(Board, X, Y, Adj):-
+
+adjacentLeft(Board, X, Y, Adj)
+
+adjacentRight(Board, X, Y, Adj)
+
+valid_move(Board, 1, X, Y):-
+    matrix(Board, X)
+
+list_valid_moves(Board, 1, X, Y, Valids):-
+
+
+
+list_valid_moves(Board, 2, Valids):-
+
+*/
