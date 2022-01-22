@@ -20,8 +20,6 @@ matrix(Board, X, Y, Value) :-
     nth0(X, Row, Value).
 
 
-
-
 adjacentUp(Board, X, Y, Adj):-
     Y = 0,
     matrix(Board, X, Y, Adj).

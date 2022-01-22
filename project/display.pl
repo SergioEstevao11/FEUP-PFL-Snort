@@ -10,7 +10,7 @@ drawMainMenu :-
     write('     1 - Begin Game     '),nl,
     write('     2 - Rules          '),nl,
     write('     3 - About Us       '),nl,
-    write('     4 - ELengthit Game      '),nl,
+    write('     4 - Exit Game      '),nl,
     write('++++++++++++++++++++++++'),nl.
 
 startGame :- 
@@ -44,13 +44,14 @@ element_at(X,[X|_],1).
 element_at(X,[_|L],K) :- K > 1, K1 is K - 1, element_at(X,L,K1).
 
 
-generateBoard(Length, Board) :-
-    length(Row, Length),
-    maplist(=([]), Row),        
-    length(Board, Length),
+initial_state(Size, Board) :-
+    length(Row, Size),
+    maplist(=(' '), Row),           
+    length(Board, Size),
     maplist(=(Row), Board).
 
-drawBoard(Board,Length) :-
+display_game(Board) :-
+    length(Board, Length),
     drawCollumIds(Length,Length),write(' |'),nl,
     write(' '),drawBoardTop(Length),
     write('|'),nl,
@@ -60,8 +61,8 @@ drawBoardBody(Board,Length,Rows) :-
     Rows > 0,
     RowsLeft is Rows - 1,
     LetterId is Length - Rows + 1,
-    write(' |'),
-    drawRowSepparation(Length),nl,
+    % write(' |'),
+    % drawRowSepparation(Length),nl,
     element_at(Letter,['A','B','C','D','E','F','G','H','I'],LetterId),
     write(Letter),write('|'),
     drawRowSepparation(Length),nl,
@@ -99,5 +100,9 @@ drawCollumIds(Length,LengthLeft) :-
     drawCollumIds(Length,Next).
 drawCollumIds(_,0).
 
+
+matrix(Board, X, Y, Value) :-
+    nth0(Y, Board, Row),
+    nth0(X, Row, Value).
 
 letters(['A','B','C','D','E','F','G','H','I']).
