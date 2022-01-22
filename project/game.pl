@@ -158,12 +158,5 @@ game_over(_, Winner):-
     Winner is 0.
 
 
-choose_move(Player, Board, 1, Move):-
-    valid_moves([Player, Board], ValidMoves),
-    length(ValidMoves, Len),
-    random(0, Len, Index),
-    nth0(Index, ValidMoves, Move).
-
-
 
 

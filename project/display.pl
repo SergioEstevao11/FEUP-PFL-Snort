@@ -55,7 +55,22 @@ getUserInput :-
         invalidInput
     ).
 
-getUserMove(Board) :- 
+
+
+
+choose_move(Player, Board, 0, Move):-
+    getUserMove(Board, Player, Move).
+
+choose_move(Player, Board, 1, Move):-
+    valid_moves([Player, Board], ValidMoves),
+    length(ValidMoves, Len),
+    random(0, Len, Index),
+    nth0(Index, ValidMoves, Move).
+
+
+
+
+getUserMove(Board, Move) :- 
     write('Its your turn to make a move! Which move would you like to make?'),nl,
     write('Please enter your input with the letter followed by the number as in A5, for example.'),nl,
     repeat,
@@ -67,7 +82,7 @@ getUserMove(Board) :-
     charToCoord(Y, YInt),
     nl,
     (
-        Length = 2, valid_move(Board,1,XInt,YInt);
+        Length = 2, valid_move(Board,1,XInt,YInt), Move is [XInt, YInt];
         invalidMove
     ).
 
