@@ -1,23 +1,7 @@
 :- use_module(library(lists)).
+:- use_module(library(random)).
 
-getXInput(X):-
-    get_code(Code), skip_line,
-    UppercaseCode is Code /\ \(32),
-    UppercaseCode >= 65, UppercaseCode < 91,
-    X is UppercaseCode-65.
-
-
-getInput(X,Y):-
-    repeat,
-    getXInput(X),
-    read(Y),
-    write(X),
-    write(Y).
-
-
-matrix(Board, X, Y, Value) :-
-    nth0(Y, Board, Row),
-    nth0(X, Row, Value).
+:- ensure_loaded(utils).
 
 
 adjacentUp(Board, X, Y, Adj):-
@@ -127,21 +111,55 @@ list_valid_moves(Board, Player, X, Y, Valids, NewValids):-
 /* valid_moves(+GameState, -ValidMoves) => valid_moves([2, [[' ', 'X', ' '], [' ', 'X', ' '], ['X', ' ', ' ']]], Vals).*/
 valid_moves([Player, Board], ValidMoves):-
     list_valid_moves(Board, Player, 0, 0, [], ValidMoves).
-/*
-play_game:-
-    getGameConfigs(Size, GameMode),
-    initial_state(Size, Board),
-    gameCycle(Board, 1, GameMode).
 
-gameCycle(Board, Player, _):-
-    game_over([Player, Board], Winner),
-    Winner \= '0',
+
+
+
+
+/*move(1, [[' ', 'X', ' '], [' ', 'X', ' '], ['X', ' ', ' ']], [2,2], NewBoard).*/
+
+replace(X, Row, NewValue, NewRow) :-
+  nth0(X, Row, _, R),
+  nth0(X, NewRow, NewValue, R).
+
+move(1, Board, [X, Y], NewGameState):-
+    nth0(Y, Board, OldRow),
+    replace(X, OldRow, 'X', NewRow),
+    replace(Y, Board, NewRow, NewGameState).
+
+move(2, Board, [X, Y], NewGameState):-
+    nth0(Y, Board, OldRow),
+    replace(X, OldRow, 'O', NewRow),
+    replace(Y, Board, NewRow, NewGameState).
+
+
+
+
+
+
+game_over(GameState, Winner):-
+    valid_moves([1, GameState], ValidMoves),
+    length(ValidMoves, Len),
+    Len =:= 0,
     !,
-    write('Player '), write(Winner), write(' won!'), nl.
+    Winner is 2.
 
-gameCycle(Board, Player, GameMode):-
-    choose_move(Board)
-*/
+game_over(GameState, Winner):-
+    valid_moves([2, GameState], ValidMoves),
+    length(ValidMoves, Len),
+    Len =:= 0,
+    !,
+    Winner is 1.
+
+game_over(_, Winner):-
+    Winner is 0.
+
+
+choose_move(Player, Board, 1, Move):-
+    valid_moves([Player, Board], ValidMoves),
+    length(ValidMoves, Len),
+    random(0, Len, Index),
+    nth0(Index, ValidMoves, Move).
 
 
 
