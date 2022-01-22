@@ -1,5 +1,17 @@
 :- use_module(library(lists)).
-:- consult(game).
+
+:- ensure_loaded(game).
+
+
+charToCoord(Char, Coord):-
+    atom_codes(Char, Code),
+    UppercaseCode is Code /\ \(32),
+    UppercaseCode >= 65, UppercaseCode < 91,
+    Coord is UppercaseCode-65.
+
+atomToCoord(Atom, Coord):-
+    atom_codes(Atom, Code),
+    Coord is Code-49.
 
 cls :- write('\33\[2J').
 
@@ -48,13 +60,14 @@ getUserMove(Board) :-
     write('Please enter your input with the letter followed by the number as in A5, for example.'),nl,
     repeat,
     read(Move),   
-    length(Move,Length),
-    sub_atom(Move, 1, 1, 0, X),
-    sub_atom(Move, 0, 1, 0, Y),
-    X is getXInput(X),
+    atom_length(Move, Length),
+    sub_atom(Move, 1, 1, _, X),
+    sub_atom(Move, 0, 1, _, Y),
+    atomToCoord(X, XInt),
+    charToCoord(Y, YInt),
     nl,
     (
-        Length == 2, valid_move(Board,1,X,Y);
+        Length = 2, valid_move(Board,1,XInt,YInt);
         invalidMove
     ).
 
@@ -130,9 +143,4 @@ drawCollumIds(Length,LengthLeft) :-
     write(' |  '),write(Id),
     drawCollumIds(Length,Next).
 drawCollumIds(_,0).
-
-
-matrix(Board, X, Y, Value) :-
-    nth0(Y, Board, Row),
-    nth0(X, Row, Value).
 

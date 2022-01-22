@@ -1,5 +1,4 @@
 :- ensure_loaded(display).
-:- ensure_loaded(gama).
 
 /*
 
