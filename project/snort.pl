@@ -10,11 +10,12 @@ next_player(2, NextPlayer):- NextPlayer is 1.
 play_game:-
     getGameConfigs(Size, GameMode),
     initial_state(Size, Board),
+    display_game(Board),
     game_cycle(Board, 1, GameMode).
 
 game_cycle(GameState, Player, _):-
     game_over(GameState, Winner),
-    Winner \= '0',
+    Winner \= 0,
     !,
     write('Player '), write(Winner), write(' won!'), nl.
 

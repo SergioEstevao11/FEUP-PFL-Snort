@@ -15,17 +15,31 @@ atomToCoord(Atom, Coord):-
 
 cls :- write('\33\[2J').
 
+getGameConfigs(Size,GameMode) :-
+    mainMenu,
+    gameMenu(GameMode),
+    getBoardInput(Size).
+
+
 drawMainMenu :-
-    write('        Welcome to      '),nl,
-    write('          Snort         '),nl,
     write('++++++++++++++++++++++++'),nl,
-    write('     1 - Begin Game     '),nl,
-    write('     2 - Rules          '),nl,
-    write('     3 - About Us       '),nl,
-    write('     4 - Exit Game      '),nl,
+    write('|        Welcome to    |'),nl,
+    write('|          Snort       |'),nl,
+    write('++++++++++++++++++++++++'),nl,
+    write('|     1 - Begin Game   |'),nl,
+    write('|     2 - Rules        |'),nl,
+    write('|     3 - About Us     |'),nl,
+    write('|     4 - Exit Game    |'),nl,
     write('++++++++++++++++++++++++'),nl.
 
-startGame :- 
+drawGameMenu :-
+    write('++++++++++++++++++++++++++++++'),nl,
+    write('|     1 - Player vs Player    |'),nl,
+    write('|     2 - Player vs Bot       |'),nl,
+    write('+++++++++++++++++++++++++++++'),nl.
+
+
+mainMenu :- 
     cls,
     drawMainMenu,
     repeat,
@@ -33,10 +47,24 @@ startGame :-
     number(Option),
     nl,
     (
-        Option = 1, getUserInput, true  ;
-        Option = 4, true;
+        Option = 1, drawGameMenu, gameMenu(GameMode);
+        Option = 2, true;
         invalidInput
     ).
+
+gameMenu(GameMode) :- 
+    cls,
+    drawGameMenu,
+    repeat,
+    read(Option),   
+    number(Option),
+    nl,
+    (
+        Option = 1;
+        Option = 2;
+        invalidInput
+    ),
+    GameMode is Option - 1.
 
 invalidInput :- 
     write('The option you chose is not available! Please try again:'),nl,fail.
@@ -44,48 +72,44 @@ invalidInput :-
 invalidMove :- 
     write('The move you have selected is not valid! Please try again:'),nl,fail.
 
-getUserInput :- 
+getBoardInput(Size) :- 
     write('Welcome to our game! Please enter the size of the board in which you would like to play (From 4x4 to 9x9): '),nl,
     repeat,
-    read(Size),   
-    number(Size),
+    read(BoardSize),   
+    number(BoardSize),
     nl,
     (
-        Size >3, Size < 10, generateBoard(Size,Board), drawBoard(Board,Size);
+        BoardSize >3, BoardSize < 10;
         invalidInput
-    ).
-
-
-
+    ),
+    Size is BoardSize.
 
 choose_move(Player, Board, 0, Move):-
-    getUserMove(Board, Player, Move).
+    getUserMove(Board, Player, Move),
+    !,
+    write('Here').
 
-choose_move(Player, Board, 1, Move):-
+choose_move(2, Board, 1, Move):-
     valid_moves([Player, Board], ValidMoves),
     length(ValidMoves, Len),
     random(0, Len, Index),
     nth0(Index, ValidMoves, Move).
 
-
-
-
-getUserMove(Board, Move) :- 
+getUserMove(Board, Player, Move) :- 
     write('Its your turn to make a move! Which move would you like to make?'),nl,
     write('Please enter your input with the letter followed by the number as in A5, for example.'),nl,
     repeat,
-    read(Move),   
-    atom_length(Move, Length),
-    sub_atom(Move, 1, 1, _, X),
-    sub_atom(Move, 0, 1, _, Y),
+    read(InputMove),   
+    atom_length(InputMove, Length),
+    sub_atom(InputMove, 1, 1, _, X),
+    sub_atom(InputMove, 0, 1, _, Y),
     atomToCoord(X, XInt),
     charToCoord(Y, YInt),
     nl,
     (
-        Length = 2, valid_move(Board,1,XInt,YInt), Move is [XInt, YInt];
+        Length = 2, valid_move(Board,Player,XInt,YInt), append([XInt,YInt], [], Move);
         invalidMove
-    ).
-
+    ). 
 
 element_at(X,[X|_],1).
 element_at(X,[_|L],K) :- K > 1, K1 is K - 1, element_at(X,L,K1).
