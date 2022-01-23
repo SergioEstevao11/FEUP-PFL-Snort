@@ -136,21 +136,21 @@ move(Board, 2, [X, Y], NewGameState):-
     replace(Y, Board, NewRow, NewGameState).
 
 
-game_over(GameState, Winner):-
+game_over(GameState, 1, Winner):-
     valid_moves([1, GameState], ValidMoves),
     length(ValidMoves, Len),
     Len =:= 0,
     !,
     Winner is 2.
 
-game_over(GameState, Winner):-
+game_over(GameState, 2, Winner):-
     valid_moves([2, GameState], ValidMoves),
     length(ValidMoves, Len),
     Len =:= 0,
     !,
     Winner is 1.
 
-game_over(_, Winner):-
+game_over(_, _,  Winner):-
     Winner is 0.
 
 

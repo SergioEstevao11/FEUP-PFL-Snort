@@ -148,7 +148,7 @@ choose_move(Board, Player, GameMode, Move):-
 
 getUserMove(Board, Player, Move) :- 
     nl,
-    write('Its your turn to make a move! Which move would you like to make?'),nl,
+    write('Its player '),write(Player),write(' turn! Which move would you like to make?'),nl,
     write('Please enter your input with a lowercase letter followed by the number as in a5, for example.'),nl,
     repeat,
     read(InputMove),    
