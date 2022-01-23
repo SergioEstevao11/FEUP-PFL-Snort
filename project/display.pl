@@ -128,17 +128,26 @@ getBoardInput(Size) :-
     ),
     Size is BoardSize.
 
-choose_move(Board, Player, 0, Move):-
-    getUserMove(Board, Player, Move).
-
-choose_move(Board, Player, 1, Move):-
+choose_move(Board, 2, 1, Move):-
     valid_moves([Player, Board], ValidMoves),
     length(ValidMoves, Len),
     random(0, Len, Index),
-    nth0(Index, ValidMoves, Move).
+    nth0(Index, ValidMoves, Move),
+    announceBotMove(Move).
 
+
+announceBotMove([X,Y]) :-
+    LetterCode is Y + 65,
+    char_code(YMove, LetterCode),
+    XMove is X + 1,
+    nl,
+    write('The bot has played '),write(YMove),write(XMove),write('!'),nl,nl.
+
+choose_move(Board, Player, GameMode, Move):-
+    getUserMove(Board, Player, Move).
 
 getUserMove(Board, Player, Move) :- 
+    nl,
     write('Its your turn to make a move! Which move would you like to make?'),nl,
     write('Please enter your input with a lowercase letter followed by the number as in a5, for example.'),nl,
     repeat,
@@ -196,8 +205,8 @@ drawValue(Board, Length, Row):-
     length(Board,Size),
     Length > 0,
     LengthLeft is Length - 1,
-    X is Size - Row,
-    Y is Size - Length,
+    Y is Size - Row,
+    X is Size - Length,
     matrix(Board,X,Y,Value),
     write(' '),write(Value),write('  |'),
     drawValue(Board, LengthLeft, Row).
