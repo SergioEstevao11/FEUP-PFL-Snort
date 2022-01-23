@@ -1,22 +1,36 @@
-
+/**
+ * Converts a char to a coordinate A -> 0, for example
+ */
 charToCoord(Char, Coord):-
     atom_codes(Char, Code),
     UppercaseCode is Code /\ \(32),
     UppercaseCode >= 65, UppercaseCode < 91,
     Coord is UppercaseCode-65.
 
+
+/**
+ * Converts a char to a coordinate A -> 0, for example
+ */
 atomToCoord(Atom, Coord):-
     atom_codes(Atom, Code),
     Coord is Code-49.
 
+/**
+ * Clears the terminal screen 
+ */
 cls :- write('\33\[2J').
 
-
+/**
+ * Function that handles the beginning of the game 
+ */
 getGameConfigs(Size,GameMode) :-
     mainMenu,
     gameMenu(GameMode),
     getBoardInput(Size).
 
+/**
+ * Function that handles the main menu 
+ */
 mainMenu :- 
     cls,
     drawMainMenu,
@@ -30,6 +44,9 @@ mainMenu :-
         invalidInput
     ).
 
+/**
+ * Function that handles the rules menu 
+ */
 rulesMenu :-
     cls,nl,
     drawRules,
@@ -41,6 +58,9 @@ rulesMenu :-
         invalidInput
     ).
     
+/**
+ * Function that handles the 'about us' menu 
+ */
 aboutMenu :-
     cls,nl,
     drawAbout,
@@ -52,7 +72,9 @@ aboutMenu :-
         invalidInput
     ).
     
-
+/**
+ * Function that handles the game option menu 
+ */
 gameMenu(GameMode) :- 
     cls,
     drawGameMenu,
@@ -66,7 +88,9 @@ gameMenu(GameMode) :-
     ),
     GameMode is Option - 1.
 
-
+/**
+ * Function that gets the user's input for the size of the board
+ */
 getBoardInput(Size) :- 
     write('Welcome to our game! Please enter the size of the board in which you would like to play (From 4x4 to 9x9): '),nl,
     repeat,
@@ -82,6 +106,9 @@ getBoardInput(Size) :-
 
 
 
+/**
+ * Function that handles the choice of a move
+ */
 
 choose_move(Board, 2, 1, Move):-
     botMove(Board, Move),
@@ -89,6 +116,10 @@ choose_move(Board, 2, 1, Move):-
 
 choose_move(Board, Player, GameMode, Move):-
     getUserMove(Board, Player, Move).
+
+/**
+ * Function that asks the user's which move he would like to play and handles it
+ */
 
 getUserMove(Board, Player, Move) :- 
     nl,
