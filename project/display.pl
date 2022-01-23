@@ -38,26 +38,70 @@ drawGameMenu :-
     write('|     2 - Player vs Bot       |'),nl,
     write('+++++++++++++++++++++++++++++'),nl.
 
+drawRules :-
+    write('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'),nl,
+    write('|                            SNORT, is a board game from 1970                                          |'),nl,
+    write('|                The name comes from the name of its inventor (Simon NORTon)                           |'),nl,
+    write('|            Two players, black and white, take turns dropping pieces onto empty squares               |'),nl,
+    write('|    The pieces must be placed on squares that are not orthognoally adjacent to another players piece  |'),nl,
+    write('|                   The game ends when there are no more moves are available.                          |'),nl,
+    write('|                        The last player to make a move wins the game.                                 |'),nl,
+    write('|                                                                                                      |'),nl,
+    write('|                                        1 - Go back                                                   |'),nl,
+    write('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'),nl.
 
+drawAbout :-
+    write('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'),nl,
+    write('|                            PFL - Programacao Funcional e Logica                                      |'),nl,
+    write('|                                                                                                      |'),nl,
+    write('|                                          Snort                                                       |'),nl,
+    write('|                                                                                                      |'),nl,
+    write('|                                Joao Afonso, up201905589                                              |'),nl,
+    write('|                               Sergio Estevao, up201905680                                            |'),nl,
+    write('|                                                                                                      |'),nl,
+    write('|                                        1 - Go back                                                   |'),nl,
+    write('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'),nl.
 mainMenu :- 
     cls,
     drawMainMenu,
     repeat,
     read(Option),   
-    number(Option),
     nl,
     (
-        Option = 1, drawGameMenu, gameMenu(GameMode);
-        Option = 2, true;
+        Option = 1, drawGameMenu;
+        Option = 2, rulesMenu;
+        Option = 3, aboutMenu;
         invalidInput
     ).
+
+rulesMenu :-
+    cls,nl,
+    drawRules,
+    repeat,
+    read(Option),   
+    nl,
+    (
+        Option = 1, mainMenu;
+        invalidInput
+    ).
+    
+aboutMenu :-
+    cls,nl,
+    drawAbout,
+    repeat,
+    read(Option),   
+    nl,
+    (
+        Option = 1, mainMenu;
+        invalidInput
+    ).
+    
 
 gameMenu(GameMode) :- 
     cls,
     drawGameMenu,
     repeat,
     read(Option),   
-    number(Option),
     nl,
     (
         Option = 1;
@@ -93,11 +137,12 @@ choose_move(Board, Player, 1, Move):-
     random(0, Len, Index),
     nth0(Index, ValidMoves, Move).
 
+
 getUserMove(Board, Player, Move) :- 
     write('Its your turn to make a move! Which move would you like to make?'),nl,
-    write('Please enter your input with the letter followed by the number as in A5, for example.'),nl,
+    write('Please enter your input with a lowercase letter followed by the number as in a5, for example.'),nl,
     repeat,
-    read(InputMove),   
+    read(InputMove),    
     atom_length(InputMove, Length),
     sub_atom(InputMove, 1, 1, _, X),
     sub_atom(InputMove, 0, 1, _, Y),

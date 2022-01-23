@@ -136,10 +136,6 @@ move(2, Board, [X, Y], NewGameState):-
     replace(Y, Board, NewRow, NewGameState).
 
 
-
-
-
-
 game_over(GameState, Winner):-
     valid_moves([1, GameState], ValidMoves),
     length(ValidMoves, Len),
