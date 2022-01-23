@@ -24,24 +24,26 @@ cls :- write('\33\[2J').
  * Function that handles the beginning of the game 
  */
 getGameConfigs(Size,GameMode) :-
-    mainMenu(GameMode),
-    !,
-    getBoardInput(Size).
+    mainMenu(Size,GameMode,End),
+    End =:= 1,
+    !,fail.
 
 /**
  * Function that handles the main menu 
  */
-mainMenu(GameMode) :- 
+mainMenu(Size,GameMode,End) :- 
     cls,
     drawMainMenu,
     repeat,
     read(Option),   
+    write('BEM VINDO AO JOGO CERWEGWER'),nl,
+    write(Option),
     nl,
     (
-        Option = 1, gameMenu(GameMode);
+        Option = 1, gameMenu(Size,GameMode);
         Option = 2, rulesMenu;
         Option = 3, aboutMenu;
-        Option = 4, !, false;
+        Option = 4, End is 1, true;
         invalidInput
     ).
 
@@ -76,7 +78,7 @@ aboutMenu :-
 /**
  * Function that handles the game option menu 
  */
-gameMenu(GameMode) :- 
+gameMenu(Size,GameMode) :- 
     cls,
     drawGameMenu,
     repeat,
@@ -87,7 +89,8 @@ gameMenu(GameMode) :-
         Option = 2;
         invalidInput
     ),
-    GameMode is Option - 1.
+    GameMode is Option - 1,
+    getBoardInput(Size).
 
 /**
  * Function that gets the user's input for the size of the board
