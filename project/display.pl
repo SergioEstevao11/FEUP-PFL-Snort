@@ -84,12 +84,10 @@ getBoardInput(Size) :-
     ),
     Size is BoardSize.
 
-choose_move(Player, Board, 0, Move):-
-    getUserMove(Board, Player, Move),
-    !,
-    write('Here').
+choose_move(Board, Player, 0, Move):-
+    getUserMove(Board, Player, Move).
 
-choose_move(2, Board, 1, Move):-
+choose_move(Board, Player, 1, Move):-
     valid_moves([Player, Board], ValidMoves),
     length(ValidMoves, Len),
     random(0, Len, Index),

@@ -19,6 +19,7 @@ game_cycle(GameState, Player, _):-
     !,
     write('Player '), write(Winner), write(' won!'), nl.
 
+
 game_cycle(Board, Player, GameMode):-
     choose_move(Board, Player, GameMode, Move),
     move(Player, Board, Move, NewBoard),
