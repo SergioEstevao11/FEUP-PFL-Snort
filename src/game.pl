@@ -52,11 +52,9 @@ adjacentRight(Board, X, Y, Adj):-
     Right is X+1,
     matrix(Board, Right, Y, Adj).
 
-/*valid_moves([2, [[' ', ' ', ' ', 'O'], [' ', 'X', ' ', ' '], [' ', ' ', 'X', ' '],  [' ', ' ', ' ', ' ']]], Moves).*/
 
 
-
-valid_move(Board, 1, X, Y):-
+legal_move(Board, 1, X, Y):-
     matrix(Board, X, Y, Value),
     Value = ' ',
     adjacentUp(Board, X, Y, AdjUp), AdjUp \= 'O',
@@ -64,7 +62,7 @@ valid_move(Board, 1, X, Y):-
     adjacentLeft(Board, X, Y, AdjLeft), AdjLeft \= 'O',
     adjacentRight(Board, X, Y, AdjRight), AdjRight \= 'O'.
 
-valid_move(Board, 2, X, Y):-
+legal_move(Board, 2, X, Y):-
     matrix(Board, X, Y, Value),
     Value = ' ',
     adjacentUp(Board, X, Y, AdjUp), AdjUp \= 'X',
@@ -73,9 +71,6 @@ valid_move(Board, 2, X, Y):-
     adjacentRight(Board, X, Y, AdjRight), AdjRight \= 'X'.
 
 
-
-
-/*[[' ', 'X', ' ', 'X'], [' ', ' ', ' ', 'X'], [' ', ' ', ' ', 'X']],*/
 
 nextPlay(Board, X, Y, NewX, NewY):-
     length(Board, Len),
@@ -89,7 +84,7 @@ lastMove(Board, X, Y):-
     Y =:= Len-1.
 
 addValidMove(Board, Player, X, Y, Valids, NewValids):-
-    valid_move(Board, Player, X, Y),
+    legal_move(Board, Player, X, Y),
     !,
     append(Valids, [[X,Y]], NewValids).
 
@@ -97,8 +92,6 @@ addValidMove(_, _, _, _, Valids, NewValids):-
     append(Valids, [], NewValids).
 
     
-/*moves vão ser guardados da seguinte forma: [[1,1], [2,1], [4,1]] -> [[X,Y]]*/
-
 list_valid_moves(Board, Player, X, Y, Valids, NewValids):-
     lastMove(Board, X, Y),
     !,
@@ -112,7 +105,6 @@ list_valid_moves(Board, Player, X, Y, Valids, NewValids):-
     list_valid_moves(Board, Player, NextX, NextY, AddedValids, NewValids).
 
 
-/* valid_moves(+GameState, -ValidMoves) => valid_moves([2, [[' ', 'X', ' '], [' ', 'X', ' '], ['X', ' ', ' ']]], Vals).*/
 valid_moves([Player, Board], ValidMoves):-
     list_valid_moves(Board, Player, 0, 0, [], ValidMoves).
 
@@ -120,7 +112,6 @@ valid_moves([Player, Board], ValidMoves):-
 
 
 
-/*move(1, [[' ', 'X', ' '], [' ', 'X', ' '], ['X', ' ', ' ']], [2,2], NewBoard).*/
 
 replace(X, Row, NewValue, NewRow) :-
   nth0(X, Row, _, R),
