@@ -52,29 +52,30 @@ adjacentRight(Board, X, Y, Adj):-
     Right is X+1,
     matrix(Board, Right, Y, Adj).
 
+/*valid_moves([2, [[' ', ' ', ' ', 'O'], [' ', 'X', ' ', ' '], [' ', ' ', 'X', ' '],  [' ', ' ', ' ', ' ']]], Moves).*/
 
 
 
 valid_move(Board, 1, X, Y):-
     matrix(Board, X, Y, Value),
     Value = ' ',
-    adjacentUp(Board, X, Y, AdjUp), AdjUp \= 'O', !,
-    adjacentDown(Board, X, Y, AdjDown), AdjDown \= 'O', !,
-    adjacentLeft(Board, X, Y, AdjLeft), AdjLeft \= 'O', !,
+    adjacentUp(Board, X, Y, AdjUp), AdjUp \= 'O',
+    adjacentDown(Board, X, Y, AdjDown), AdjDown \= 'O',
+    adjacentLeft(Board, X, Y, AdjLeft), AdjLeft \= 'O',
     adjacentRight(Board, X, Y, AdjRight), AdjRight \= 'O'.
 
 valid_move(Board, 2, X, Y):-
     matrix(Board, X, Y, Value),
-    Value = ' ', !,
-    adjacentUp(Board, X, Y, AdjUp), AdjUp \= 'X', !,
-    adjacentDown(Board, X, Y, AdjDown), AdjDown \= 'X', !,
-    adjacentLeft(Board, X, Y, AdjLeft), AdjLeft \= 'X', !,
+    Value = ' ',
+    adjacentUp(Board, X, Y, AdjUp), AdjUp \= 'X',
+    adjacentDown(Board, X, Y, AdjDown), AdjDown \= 'X',
+    adjacentLeft(Board, X, Y, AdjLeft), AdjLeft \= 'X',
     adjacentRight(Board, X, Y, AdjRight), AdjRight \= 'X'.
 
 
 
 
-/*[[' ', 'X', ' '], [' ', ' ', ' '], [' ', ' ', ' ']],*/
+/*[[' ', 'X', ' ', 'X'], [' ', ' ', ' ', 'X'], [' ', ' ', ' ', 'X']],*/
 
 nextPlay(Board, X, Y, NewX, NewY):-
     length(Board, Len),

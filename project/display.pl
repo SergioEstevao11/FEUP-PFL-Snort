@@ -129,7 +129,7 @@ getBoardInput(Size) :-
     Size is BoardSize.
 
 choose_move(Board, 2, 1, Move):-
-    valid_moves([Player, Board], ValidMoves),
+    valid_moves([2, Board], ValidMoves),
     length(ValidMoves, Len),
     random(0, Len, Index),
     nth0(Index, ValidMoves, Move),

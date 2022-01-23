@@ -9,8 +9,9 @@ coinToss(Player) :- random(1,3, Player).
 play_game :-
     getGameConfigs(Size, GameMode),
     initial_state(Size, Board),
+    coinToss(Player),
     display_game(Board),
-    game_cycle(Board, 1, GameMode).
+    game_cycle(Board, Player, GameMode).
 
 
 game_cycle(Board, Player, GameMode):-
