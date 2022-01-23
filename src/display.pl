@@ -4,32 +4,56 @@
  * Draws the main menu of the game
  */
 drawMainMenu :-
-    write('++++++++++++++++++++++++'),nl,
-    write('|        Welcome to    |'),nl,
-    write('|          Snort       |'),nl,
-    write('++++++++++++++++++++++++'),nl,
-    write('|     1 - Begin Game   |'),nl,
-    write('|     2 - Rules        |'),nl,
-    write('|     3 - About Us     |'),nl,
-    write('|     4 - Exit Game    |'),nl,
-    write('++++++++++++++++++++++++'),nl.
+    write('______________________________________________'),nl,
+    write('|       _____                      _          |'),nl,
+    write('|      / ____|                    | |         |'),nl,
+    write('|     | (___   _ __    ___   _ __ | |_        |'),nl,
+    write('|      \\___ \\ | _  \\  / _ \\ |  __|| __|       |'),nl,
+    write('|      ____) || | | || (_) || |   | |_        |'),nl,
+    write('|     |_____/ |_| |_| \\___/ |_|    \\__|       |'),nl,
+    write('|                                             |'),nl,    
+    write('|                                             |'),nl,
+    write('|               1 - Start Game                |'),nl,    
+    write('|               2 - Rules                     |'),nl,
+    write('|               3 - About Us                  |'),nl,
+    write('|               4 - Exit Game                 |'),nl,
+    write('|_____________________________________________|'),nl.
+
+
 
 /**
  * Draws the game menu of the game
  */
 
 drawGameMenu :-
-    write('++++++++++++++++++++++++++++++'),nl,
-    write('|     1 - Player vs Player    |'),nl,
-    write('|     2 - Player vs Bot       |'),nl,
-    write('+++++++++++++++++++++++++++++'),nl.
+        write('______________________________________________'),nl,
+        write('|       _____                                 |'),nl,
+        write('|      / ____|                                |'),nl,
+        write('|     | |  __   __ _  _ __ ___    ___         |'),nl,
+        write('|     | | |_ | / _  || _  _   \\  / _ \\        |'),nl,
+        write('|     | |__| || (_| || | | | | ||  __/        |'),nl,
+        write('|      \\_____| \\__,_||_| |_| |_| \\___|        |'),nl,
+        write('|                                             |'),nl,    
+        write('|                                             |'),nl,
+        write('|            1 - Player vs Player             |'),nl,
+        write('|            2 - Player vs Bot                |'),nl,
+        write('|_____________________________________________|'),nl.
 
 /**
  * Draws the rules of the game
  */
 
 drawRules :-
-    write('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'),nl,
+    write(' ______________________________________________________________________________________________________'),nl,
+    write('|                              _____         _                                                         |'),nl,
+    write('|                             |  __ \\       | |                                                        |'),nl,
+    write('|                             | |__) |_   _ | |  ___  ___                                              |'),nl,
+    write('|                             |  _  /| | | || | / _ \\/ __|                                             |'),nl,
+    write('|                             | | \\ \\| |_| || ||  __/\\__ \\                                             |'),nl,
+    write('|                             |_|  \\_\\\\__,_||_| \\___||___/                                             |'),nl,
+    write('|                                                                                                      |'),nl,    
+    write('|                                                                                                      |'),nl,
+    write('|                                                                                                      |'),nl,    
     write('|                            SNORT, is a board game from 1970                                          |'),nl,
     write('|                The name comes from the name of its inventor (Simon NORTon)                           |'),nl,
     write('|            Two players, black and white, take turns dropping pieces onto empty squares               |'),nl,
@@ -38,14 +62,23 @@ drawRules :-
     write('|                        The last player to make a move wins the game.                                 |'),nl,
     write('|                                                                                                      |'),nl,
     write('|                                        1 - Go back                                                   |'),nl,
-    write('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'),nl.
+    write('|______________________________________________________________________________________________________|'),nl.
 
 /**
  * Draws the 'about us' section of the game
  */
 
 drawAbout :-
-    write('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'),nl,
+    write(' ______________________________________________________________________________________________________'),nl,
+    write('|                                        _                    _                                        |'),nl,
+    write('|                                 /\\    | |                  | |                                       |'),nl,
+    write('|                                /  \\   | |__    ___   _   _ | |_                                      |'),nl,
+    write('|                               / /\\ \\  |  _ \\  / _ \\ | | | || __|                                     |'),nl,
+    write('|                              / ____ \\ | |_) || (_) || |_| || |_                                      |'),nl,
+    write('|                             /_/    \\_\\|_.__/  \\___/  \\__,_| \\__|                                     |'),nl,
+    write('|                                                                                                      |'),nl,
+    write('|                                                                                                      |'),nl,    
+    write('|                                                                                                      |'),nl,
     write('|                            PFL - Programacao Funcional e Logica                                      |'),nl,
     write('|                                                                                                      |'),nl,
     write('|                                          Snort                                                       |'),nl,
@@ -54,7 +87,7 @@ drawAbout :-
     write('|                               Sergio Estevao, up201905680                                            |'),nl,
     write('|                                                                                                      |'),nl,
     write('|                                        1 - Go back                                                   |'),nl,
-    write('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'),nl.
+    write('|______________________________________________________________________________________________________|'),nl.
 
 
 /**

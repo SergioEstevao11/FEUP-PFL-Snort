@@ -24,21 +24,20 @@ cls :- write('\33\[2J').
  * Function that handles the beginning of the game 
  */
 getGameConfigs(Size,GameMode) :-
-    mainMenu,
-    gameMenu(GameMode),
+    mainMenu(GameMode),
     getBoardInput(Size).
 
 /**
  * Function that handles the main menu 
  */
-mainMenu :- 
+mainMenu(GameMode) :- 
     cls,
     drawMainMenu,
     repeat,
     read(Option),   
     nl,
     (
-        Option = 1, drawGameMenu;
+        Option = 1, gameMenu(GameMode);
         Option = 2, rulesMenu;
         Option = 3, aboutMenu;
         invalidInput
