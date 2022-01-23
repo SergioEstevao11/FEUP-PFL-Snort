@@ -117,17 +117,35 @@ Se houver erro no input é chamada a função invalidInput que mostra uma mensag
 
 ### **Execução de jogadas**
 
-### **Final de jogo**
+O input e validação de moves é feito apartir do predicado choose_move(+Board, +Player, +GameMode, -Move) que, por um lado, se o GameMode for 1,"Player Vs Bot", e o Player a jogar é o 2, escolhe aleatóriamente uma jogada válida, por outro, através do predicado getUserMove(+Board, +Player, +Move) pede ao Player moves até um destes ser válido.
+
+A validação de um move é feita através do predicado legal_move(+Board, +Player, +X, +Y), que verifica se a posição em que o Player pretende jogar não está ocupada e se as casas adjacentes a esta (não contando com as diagonais) não têm peças do adversário.
+
+Quando é obtido um move válido, o predicado move(+Board, +Player, +Move, -NewGameState) faz uma jogada.
+
+O predicado move usa o predicado auxiliar replace(+X, +Row, +NewValue, -NewRow) que substitui o valor na posição X de uma Row pelo NewValue.
+
 
 ### **Lista de Jogadas Válidas**
 
+O predicado valid_moves(+Player, +Board, -ListOfMoves) retorna uma lista de todas as jogadas válidas para o jogador Player no formato [ [X,Y] ]. 
+Este predicado chama um outro, list_valid_moves(+Board, +Player, +X, +Y, +Valids, -ValidMoves), que recursivamente vai verificando todas as posições do Board e acrescentando os moves válidos à list Valids.
+Todas as posições do Board são precorridas no sentido da esquerda para a direita e em seguida de cima para baixo, através do predicado nextPlay(+Board, +X, +Y, -NewX, -NewY), que retorna a posição seguinte à X, Y. Cada posição é validada com recurso ao predicado legal_move(+Board, +Player, +X, +Y), já referido anteriormente. O loop termina quando for detetada a posição no canto inferior direito do Board através do predicado lastMove(+Board, +X, +Y), sendo a list final associada à variável ValidMoves.
 
+### **Ciclo do Jogo**
+
+O ciclo principal do Snort executa no predicado game_cycle(+Board, +Player, +GameMode). Até ser detetado um Game Over, este predicado recursivamente vai recolhendo e executando inputs de moves dos dois Players alterandamente. Após cada move executado no Board, este é atualizado, renovado no terminal e o predicado game_cycle é chamado de novo com o Board atualizado e o Player adversário.
+
+### **Final de jogo**
+
+Antes de cada jogada é verificado se o Player que irá jogar têm moves possíveis. Isto é realizado através do predicado game_over(+GameState, +Player, -Winner) que, recorrendo ao predicado valid_moves, verifica se o Player ainda têm jogadas possíveis. Se isto não se verificar, considera-se que esse Player perdeu e o adversário ganhou, passado na variável Winner o vencedor do jogo (1 ou 2), quebrando o loop do game_cycle e terminando o jogo.
+Se o Player ainda tiver jogadas possíveis, Winner é colocado a 0 e o jogo continua.
 
 ### **Conclusões**
   
 Este trabalho permitiu-nos de certa forma termos um contacto diferente com a linguagem PROLOG sendo que nos permitiu observar de uma forma mais prática e divertida (na realização de um jogo) as aplicações diferentes que esta linguagem pode ter.
 
-As maiores dificuldades que encontramos foram no tempo reduzido que tivemos para a realização do trabalho visto que se trata de uma época bastante carregada de projetos às diferentes cadeiras.
+As maiores dificuldades que encontramos foram no tempo reduzido que tivemos para a realização do trabalho, visto que foi feito numa época bastante atarefada, com diversos projetos de outras unidades curriculares.
 
 No entanto, foi nos bastante satisfatório ver o progresso do jogo que desenvolvemos.
 

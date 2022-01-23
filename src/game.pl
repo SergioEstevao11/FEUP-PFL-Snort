@@ -153,7 +153,7 @@ list_valid_moves(Board, Player, X, Y, Valids, NewValids):-
 /**
  * Lists all the valid moves for a given player and board
  */
-valid_moves([Player, Board], ValidMoves):-
+valid_moves(Player, Board, ValidMoves):-
     list_valid_moves(Board, Player, 0, 0, [], ValidMoves).
 
 
@@ -184,7 +184,7 @@ move(Board, 2, [X, Y], NewGameState):-
  * Function that makes a random valid move on the board
  */
 botMove(Board, Move):-
-    valid_moves([2, Board], ValidMoves),
+    valid_moves(2, Board, ValidMoves),
     length(ValidMoves, Len),
     random(0, Len, Index),
     nth0(Index, ValidMoves, Move).
@@ -195,14 +195,14 @@ botMove(Board, Move):-
  * Verifies if a player as own, by checking if the opponent has any valid moves left, returns 0 if no one has won
  */
 game_over(GameState, 1, Winner):-
-    valid_moves([1, GameState], ValidMoves),
+    valid_moves(1, GameState, ValidMoves),
     length(ValidMoves, Len),
     Len =:= 0,
     !,
     Winner is 2.
 
 game_over(GameState, 2, Winner):-
-    valid_moves([2, GameState], ValidMoves),
+    valid_moves(2, GameState, ValidMoves),
     length(ValidMoves, Len),
     Len =:= 0,
     !,

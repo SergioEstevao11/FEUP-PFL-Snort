@@ -53,7 +53,7 @@ rulesMenu :-
     read(Option),   
     nl,
     (
-        Option = 1, mainMenu;
+        Option = 1, mainMenu(_);
         invalidInput
     ).
     
@@ -67,7 +67,7 @@ aboutMenu :-
     read(Option),   
     nl,
     (
-        Option = 1, mainMenu;
+        Option = 1, mainMenu(_);
         invalidInput
     ).
     
