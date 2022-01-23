@@ -1,9 +1,8 @@
 :- ensure_loaded(display).
 
 
-next_player(1, NextPlayer):- NextPlayer is 2.
-
-next_player(2, NextPlayer):- NextPlayer is 1.
+next_player(1, 2).
+next_player(2, 1).
 
 
 
@@ -13,17 +12,20 @@ play_game:-
     display_game(Board),
     game_cycle(Board, 1, GameMode).
 
-game_cycle(GameState, Player, _):-
-    game_over(GameState, Winner),
+
+
+game_cycle(Board, Player, GameMode):-
+    game_over(Board, Winner),
     Winner \= 0,
     !,
     write('Player '), write(Winner), write(' won!'), nl.
+    
 
 
 game_cycle(Board, Player, GameMode):-
     choose_move(Board, Player, GameMode, Move),
-    move(Player, Board, Move, NewBoard),
+    move(Board, Player, Move, NewBoard),
     next_player(Player, NextPlayer),
-    display_game(Board),
-    game_cycle(NewBoard, NewPlayer, GameMode).
+    display_game(NewBoard),
+    game_cycle(NewBoard, NextPlayer, GameMode).
 

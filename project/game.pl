@@ -125,12 +125,12 @@ replace(X, Row, NewValue, NewRow) :-
   nth0(X, Row, _, R),
   nth0(X, NewRow, NewValue, R).
 
-move(1, Board, [X, Y], NewGameState):-
+move(Board, 1, [X, Y], NewGameState):-
     nth0(Y, Board, OldRow),
     replace(X, OldRow, 'X', NewRow),
     replace(Y, Board, NewRow, NewGameState).
 
-move(2, Board, [X, Y], NewGameState):-
+move(Board, 2, [X, Y], NewGameState):-
     nth0(Y, Board, OldRow),
     replace(X, OldRow, 'O', NewRow),
     replace(Y, Board, NewRow, NewGameState).
