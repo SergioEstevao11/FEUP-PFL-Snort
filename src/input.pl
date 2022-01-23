@@ -25,6 +25,7 @@ cls :- write('\33\[2J').
  */
 getGameConfigs(Size,GameMode) :-
     mainMenu(GameMode),
+    !,
     getBoardInput(Size).
 
 /**
@@ -40,6 +41,7 @@ mainMenu(GameMode) :-
         Option = 1, gameMenu(GameMode);
         Option = 2, rulesMenu;
         Option = 3, aboutMenu;
+        Option = 4, !, false;
         invalidInput
     ).
 
