@@ -147,7 +147,7 @@ drawBoardBody(Board,Length,Rows) :-
     LetterId is Length - Rows + 1,
     write(' |'),
     drawRowSepparation(Length),nl,
-    element_at(Letter,['A','B','C','D','E','F','G','H','I'],LetterId),
+    element_at(Letter,['a','b','c','d','e','f','g','h','i'],LetterId),
     write(Letter),write('|'),
     drawValue(Board,Length,Rows),nl,
     write(' |'),
