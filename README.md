@@ -28,7 +28,7 @@ Grupo 506, 22/01/2022
 
 ### **Começar o jogo**
 
-Para conseguirmos corretamente jogar Snort temos primeiro de, consultar o código fonte apresentado no GitHub acima apresentado (ficheiro snort.pl) e de seguida executar a função *play_game.*
+Para conseguirmos corretamente jogar Snort temos primeiro de, consultar o código fonte apresentado no GitHub acima apresentado (ficheiro snort.pl) e de seguida executar a função *play.*
 
 
 ## **Descrição do jogo:**   
@@ -57,15 +57,15 @@ O jogador atual, durante a execução do jogo assume os valores 1 ou 2.
 
 * Estado inicial do jogo
 
-![](initial_board.png)
+![](images/initial_board.png)
 
 * Estado do jogo após algumas jogadas
 
-![](mid_board.png)
+![](images/mid_board.png)
 
 * Estado final do jogo
 
-![](end_board.png)
+![](images/end_board.png)
 
 
 ### **Visualização do estado de jogo**
@@ -99,10 +99,24 @@ Por fim a função drawRow desenha a separação principal entre cada uma das li
 * **Menus**
 
 Ao executarmos a função principal do jogo é nos apresentado o menu inicial que apresenta 4 opções:
+
+
+![](images/mainmenu.png)
+
 * Begin game que mostra o menu de jogo
+
+![](images/gamemenu.png)
+
 * Rules que apresenta as regras principais do jogo
+
+![](images/rules.png)
+
+
 * About Us que mostra ao utilizador algumas informações sobre o trabalho e os seus autores
-* Exit Game que permite ao utilizador sair do  jogo, acabando a execução    
+
+![](images/about.png)
+
+* Exit Game que permite ao utilizador sair do terminal, acabando a execução    
 
 Ao escolhermos a opção 1 é nos apresentado o menu de jogo que apresenta 2 opções:
 * Player vs Player que permmite ao utilizador jogar contra outro jogador

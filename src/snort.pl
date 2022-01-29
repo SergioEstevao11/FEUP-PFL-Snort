@@ -19,7 +19,7 @@ coinToss(Player) :- random(1,3, Player).
 /**
  * Starts the Game
  */
-play_game :-
+play :-
     getGameConfigs(Size, GameMode),
     initial_state(Size, Board),
     coinToss(Player),
